@@ -26,8 +26,8 @@ func init() {
 	
 	orm.RegisterDriver("mysql", orm.DRMySQL)
 	
-	orm.RegisterDataBase("default", "mysql", conf.OrmTestConfig.DB.ConnID, 
-		conf.OrmTestConfig.DB.MaxIdle, conf.OrmTestConfig.DB.MaxConn)
+	orm.RegisterDataBase("default", "mysql", conf.OrmNewConfig.DB.ConnID, 
+		conf.OrmNewConfig.DB.MaxIdle, conf.OrmNewConfig.DB.MaxConn)
 	
 	// Database alias.
 	name := "default"

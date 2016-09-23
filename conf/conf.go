@@ -17,7 +17,7 @@ const (
 )
 
 /* CFillerConfig stores the global configuration structure for cache filler */
-var OrmTestConfig struct {
+var OrmNewConfig struct {
 	DB struct {
 		Host     string
 		Port     int
@@ -29,6 +29,16 @@ var OrmTestConfig struct {
 		MaxIdle  int
 		MaxConn  int
 	}
+	NSQ struct {
+		Host     string
+		Port     string
+	}
+	Consumer struct {
+		ChannelName string
+	}
+	Queue struct {
+		Topic string
+	}
 }
 
 const allowAllFilesCommand = "allowAllFiles=true"
@@ -36,9 +46,9 @@ const charsetUTF = "charset=utf8"
 
 func init() {
 	rand.Seed(time.Now().UTC().UnixNano())
-	ReadConfig(gconfFile, &OrmTestConfig)
-	OrmTestConfig.DB.ConnID = fmt.Sprintf("%s:%s@%s(%s:%d)/%s?%s&%s", OrmTestConfig.DB.Username, OrmTestConfig.DB.Password, OrmTestConfig.DB.Protocol,
-		OrmTestConfig.DB.Host, OrmTestConfig.DB.Port, OrmTestConfig.DB.DB, allowAllFilesCommand, charsetUTF)
+	ReadConfig(gconfFile, &OrmNewConfig)
+	OrmNewConfig.DB.ConnID = fmt.Sprintf("%s:%s@%s(%s:%d)/%s?%s&%s", OrmNewConfig.DB.Username, OrmNewConfig.DB.Password, OrmNewConfig.DB.Protocol,
+		OrmNewConfig.DB.Host, OrmNewConfig.DB.Port, OrmNewConfig.DB.DB, allowAllFilesCommand, charsetUTF)
 }
 
 /*ReadConfig - reads the flags for --conf and if its found reads file and sets configuration into out. If --conf is not provided, then defaultPath is used. */
